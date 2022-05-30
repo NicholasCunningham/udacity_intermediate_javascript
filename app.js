@@ -40,6 +40,7 @@ function Dinosaur(species, weight, height, diet, where, when, fact) {
 // On button click, prepare and display infographic
 
 // Test button clicking
-function testButtonClick(phrase) {
-    console.log(phrase)
+function testSelection() {
+    const selection = document.getElementById("diet")
+    console.log("You chose " + selection + "!")
 }
