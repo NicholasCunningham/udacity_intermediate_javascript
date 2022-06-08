@@ -45,5 +45,5 @@ let element = document.querySelector('#diet');
 element.addEventListener('change', (event) => {
     const testSelect = document.querySelector('.testSelect');
     testSelect.textContent = `You selected ${event.target.value}`
-}
+})
 // }
