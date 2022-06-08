@@ -41,7 +41,7 @@ function Dinosaur(species, weight, height, diet, where, when, fact) {
 
 // Test button clicking
 function testSelection() {
-    let element = document.querySelector('.diet');
+    let element = document.querySelector('#diet');
     // let selection = element.options[element.selectedIndex].text;
     element.addEventListener('change', (event) => console.log(`You selected ${event.target.value}!`))
 }
