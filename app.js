@@ -1,5 +1,5 @@
 // Bring in dinosaur info via function to avoid globals
-const dinosaurs = () => {
+function populateDinosaurs() {
     return [
         {
             "species": "Triceratops",
@@ -77,21 +77,23 @@ const dinosaurs = () => {
 }
 
 // Create Dino Constructor
-function Dinosaur(species, weight, height, diet, where, when, fact) {
-    this.species = species,
-        this.weight = weight,
-        this.height = height,
-        this.diet = diet,
-        this.where = where,
-        this.when = when,
-        this.fact = fact
+function Dinosaur(dinosaur) {
+    console.log('Dino passed to constructor: ', dinosaur)
+    this.species = dinosaur.species,
+        this.weight = dinosaur.weight,
+        this.height = dinosaur.height,
+        this.diet = dinosaur.diet,
+        this.where = dinosaur.where,
+        this.when = dinosaur.when,
+        this.fact = dinosaur.fact
 }
 
 // Create Dino Objects
 function createDinosaurs() {
-    // TODO: Implement construction of dino objects
-
-    console.log('This function is not yet implemented.')
+    const dinosaurs = populateDinosaurs()
+    testSingleDinosaur = dinosaurs[0]
+    console.log({ testSingleDinosaur })
+    return new Dinosaur(testSingleDinosaur)
 }
 
 // Create Human Object
@@ -131,12 +133,12 @@ const dinosaurPrototype = {
 Dinosaur.prototype = dinosaurPrototype
 
 // Generate Tiles for each Dino in Array
-function createDinosaurTile(dinosaurInfo) {
+function createDinosaurTile(dinosaur) {
     const div = document.createElement('div')
-    div.innerText = `${dinosaurInfo.species}`
+    div.innerText = `${dinosaur.species}`
 
     const dinosaurImage = document.createElement('img')
-    dinosaurImage.src = `images/${dinosaurInfo.species.toLowerCase()}.png`
+    dinosaurImage.src = `images/${dinosaur.species.toLowerCase()}.png`
     div.append(dinosaurImage)
 
     return div
@@ -151,17 +153,22 @@ function createHumanTile(humanInfo) {
 
 // Add tiles to DOM
 function createGrid(dinosaurInfo, humanInfo) {
-    console.log('createGrid function is not yet implemented.')
+    // Create div for each dinosaur object
+    const dinosaurTile = createDinosaurTile(dinosaurInfo)
+    document.querySelector('#grid').append(dinosaurTile)
 }
 
 // On button click, prepare and display infographic
 function handleFormSubmission(event) {
+    // Hide form
     document.querySelector('form').style.display = 'none'
 
-    console.log('You clicked the button! Too bad this function isn\'t implemented yet.')
+    // Populate grid
+    testDinosaur = createDinosaurs()
+    createGrid(testDinosaur, {})
 }
 
-// Use IIFE to get human data from form
+// Use IIFE to listen for click and grab human data
 (function () {
     document.querySelector('#btn').addEventListener('click', handleFormSubmission)
 })()
