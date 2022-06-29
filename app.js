@@ -1,3 +1,4 @@
+// Bring in dinosaur info via function to avoid globals
 const dinosaurs = () => {
     return [
         {
@@ -105,59 +106,62 @@ const dinosaurPrototype = {
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
     compareWeight: function (humanWeight) {
-        // TODO: Implement comparison between passed in human weight and this dinosaur's weight
+        const weightComparison = (humanWeight / this.weight).toFixed(2)
 
-        console.log('This function is not yet implemented.')
+        return `You weigh ${weightComparison} times as much as the ${this.species}.`
     },
 
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
     compareHeight: function (humanHeight) {
-        // TODO: Implement comparison between passed in human height and this dinosaur's height
+        const heightComparison = (humanHeight / this.height).toFixed(2)
 
-        console.log('This function is not yet implemented.')
+        return `You are ${heightComparison} times as tall as the ${this.species}.`
     },
 
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
     compareDiet: function (humanDiet) {
-        // TODO: Implement comparison between passed in human diet and this dinosaur's diet
-
-        console.log('This function is not yet implemented.')
+        return this.diet === humanDiet ?
+            `You have the same diet as ${this.species}.` :
+            `${this.species} has a ${this.diet} but you have a ${humanDiet} diet.`
     }
 }
 
+Dinosaur.prototype = dinosaurPrototype
+
 // Generate Tiles for each Dino in Array
 function createDinosaurTile(dinosaurInfo) {
-    // TODO: Create a new grid element
+    const div = document.createElement('div')
+    div.innerText = `${dinosaurInfo.species}`
 
-    console.log('This function is not yet implemented.')
+    const dinosaurImage = document.createElement('img')
+    dinosaurImage.src = `images/${dinosaurInfo.species.toLowerCase()}.png`
+    div.append(dinosaurImage)
+
+    return div
 }
 
 // Generate tile for human
 function createHumanTile(humanInfo) {
     // TODO: Create a new grid element
 
-    console.log('This function is not yet implemented.')
+    console.log('createHumanTile function is not yet implemented.')
 }
 
 // Add tiles to DOM
 function createGrid(dinosaurInfo, humanInfo) {
-    // TODO: Create new fragment for appending to DOM
-
-    // TODO: Append dinosaur tiles and human tile to grid
-
-    console.log('This function is not yet implemented.')
+    console.log('createGrid function is not yet implemented.')
 }
 
 // On button click, prepare and display infographic
 function handleFormSubmission(event) {
-    // TODO: Clear form from screen
+    document.querySelector('form').style.display = 'none'
 
     console.log('You clicked the button! Too bad this function isn\'t implemented yet.')
 }
 
 // Use IIFE to get human data from form
 (function () {
-    document.getElementById('btn').addEventListener('click', handleFormSubmission)
+    document.querySelector('#btn').addEventListener('click', handleFormSubmission)
 })()
