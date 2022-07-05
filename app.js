@@ -1,4 +1,10 @@
-// Create Dino Constructor
+/**
+* @description Represents an individual dinosaur
+* @constructor
+* @param {Object} dinosaur - The object representation of a dinosaur, including
+                             species, weight, height, diet, where it lived, when it
+                             lived, and a fact about it
+*/
 function Dinosaur(dinosaur) {
     this.species = dinosaur.species,
         this.weight = dinosaur.weight,
@@ -10,10 +16,9 @@ function Dinosaur(dinosaur) {
 }
 
 
-// Create prototype for dinosaur to avoid recreating functions with each instance
 const dinosaurPrototype = {
     // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches. 
+    // NOTE: Weight in JSON file is in lbs, height in inches.
     compareWeight: function (humanWeight) {
         const weightComparison = ((humanWeight / this.weight) * 100).toFixed(1)
 
@@ -40,7 +45,11 @@ const dinosaurPrototype = {
 Dinosaur.prototype = dinosaurPrototype
 
 
-// Bring in dinosaur info via function to avoid globals
+/**
+* @description Adds two numbers
+* @returns {Array<Object>} An array of eight plain objects representing dinosaurs,
+                           for use in other functions 
+*/
 function populateDinosaurs() {
     return [
         {
@@ -119,7 +128,10 @@ function populateDinosaurs() {
 }
 
 
-// Create Dino Objects
+/**
+* @description Creates all of the required Dinosaur objects at once
+* @returns {Array<Dinosaur>} An array of eight constructed dinosaur objects 
+*/
 function createDinosaurs() {
     const dinosaursArray = populateDinosaurs()
     let dinosaurs = []
@@ -132,7 +144,11 @@ function createDinosaurs() {
 }
 
 
-// Create Human Object
+/**
+* @description Creates an object representing the human data collected 
+               from user input on the form
+* @returns {Object} An array of eight dinosaur objects for use in other functions 
+*/
 function createHuman() {
     let dietSelection = document.querySelector('#diet')
 
@@ -146,7 +162,11 @@ function createHuman() {
 }
 
 
-// Generate tile for human
+/**
+* @description Creates a tile representing the human data for placement in the grid
+* @param {Object} humanInfo - The object representation of a human
+* @returns {Element} A div element containing the human's name and an image of a human
+*/
 function createHumanTile(humanInfo) {
     const div = document.createElement('div')
     div.className = 'grid-item'
@@ -160,7 +180,12 @@ function createHumanTile(humanInfo) {
 }
 
 
-// Generate Tiles for each Dino in Array
+/**
+* @description Creates a tile representing the dinosaur data for placement in the grid
+* @param {Object} dinosaur - The object representation of a dinosaur
+* @returns {Element} A div element containing the dinosaur species' name, 
+                     an image of the dinosaur, and a random fact about the dinosaur
+*/
 function createDinosaurTile(dinosaur) {
     const div = document.createElement('div')
     div.className = 'grid-item'
@@ -179,7 +204,11 @@ function createDinosaurTile(dinosaur) {
     return div
 }
 
-
+/**
+* @description Produces one of six random facts relating to the given dinosaur
+* @param {Object} dinosaur - The object representation of a dinosaur
+* @returns {string} A random fact, potentially comparing the human and dinosaur
+*/
 function produceRandomFact(dinosaur) {
     human = createHuman()
     factNumber = Math.floor(Math.random() * 6)
@@ -203,7 +232,11 @@ function produceRandomFact(dinosaur) {
 }
 
 
-// Add tiles to DOM
+/**
+* @description Creates a grid using the 8 dinosaur tiles and the human tile
+* @param {Object} dinosaurInfo - The object representation of a dinosaur
+* @param {Object} humanInfo - The object representation of a human
+*/
 function createGrid(dinosaurInfo, humanInfo) {
     //Create div for human object
     const humanTile = createHumanTile(humanInfo)
@@ -220,8 +253,10 @@ function createGrid(dinosaurInfo, humanInfo) {
 }
 
 
-// On button click, prepare and display infographic
-function handleFormSubmission(event) {
+/**
+* @description Handles the removal of the form and display of the grid on form submission
+*/
+function handleFormSubmission() {
     // Hide form
     document.querySelector('form').style.display = 'none'
 
@@ -232,7 +267,9 @@ function handleFormSubmission(event) {
 }
 
 
-// IIFE to listen for form submission
+/**
+* @description IIFE to add event listener for form submission
+*/
 (function () {
     document.querySelector('#btn').addEventListener('click', handleFormSubmission)
 })()
