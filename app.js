@@ -187,14 +187,18 @@ function createDinosaurTile(dinosaur) {
 
 // Add tiles to DOM
 function createGrid(dinosaurInfo, humanInfo) {
+    //Create div for human object
+    const humanTile = createHumanTile(humanInfo)
+    grid = document.querySelector('#grid')
+
     // Create div for each dinosaur object
     dinosaurInfo.forEach(dinosaur => {
         const dinosaurTile = createDinosaurTile(dinosaur)
-        document.querySelector('#grid').append(dinosaurTile)
+        grid.append(dinosaurTile)
     })
-    //Create div for human object
-    const humanTile = createHumanTile(humanInfo)
-    document.querySelector('#grid').append(humanTile)
+
+    // Insert human tile in correct position
+    grid.insertBefore(humanTile, grid.children[4])
 }
 
 
