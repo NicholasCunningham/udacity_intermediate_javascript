@@ -118,25 +118,52 @@ function populateDinosaurs() {
     ]
 }
 
+
 // Create Dino Objects
 function createDinosaurs() {
     const dinosaursArray = populateDinosaurs()
     let dinosaurs = []
-    testSingleDinosaur = dinosaursArray[0]
-    dinosaurSlice = dinosaursArray.slice(0, 3)
 
     dinosaursArray.forEach(dinosaur => {
         dinosaurs.push(new Dinosaur(dinosaur))
     })
+
     return dinosaurs
 }
 
 
 // Create Human Object
 function createHuman() {
-    // TODO: Implement construction of human object
+    let heightFeet = document.querySelector('#feet').value
+    let heightInches = document.querySelector('#inches').value
+    let weight = document.querySelector('#weight').value
+    let dietSelection = document.querySelector('#diet')
+    let diet = dietSelection.options[dietSelection.selectedIndex].text
 
-    console.log('This function is not yet implemented.')
+    return {
+        feet: heightFeet,
+        inches: heightInches,
+        weight: weight,
+        diet: diet
+    }
+}
+
+
+// Generate tile for human
+function createHumanTile(humanInfo) {
+    const div = document.createElement('div')
+    div.className = 'grid-item'
+    div.innerHTML = `<h2>Human</h2>`
+
+    const humanImage = document.createElement('img')
+    humanImage.src = `images/human.png`
+    div.append(humanImage)
+
+    const randomFact = document.createElement('p')
+    randomFact.innerText = `You are ${humanInfo.feet} feet and ${humanInfo.inches} inches tall!`
+    div.append(randomFact)
+
+    return div
 }
 
 
@@ -158,14 +185,6 @@ function createDinosaurTile(dinosaur) {
 }
 
 
-// Generate tile for human
-function createHumanTile(humanInfo) {
-    // TODO: Create a new grid element
-
-    console.log('createHumanTile function is not yet implemented.')
-}
-
-
 // Add tiles to DOM
 function createGrid(dinosaurInfo, humanInfo) {
     // Create div for each dinosaur object
@@ -173,6 +192,9 @@ function createGrid(dinosaurInfo, humanInfo) {
         const dinosaurTile = createDinosaurTile(dinosaur)
         document.querySelector('#grid').append(dinosaurTile)
     })
+    //Create div for human object
+    const humanTile = createHumanTile(humanInfo)
+    document.querySelector('#grid').append(humanTile)
 }
 
 
@@ -183,8 +205,8 @@ function handleFormSubmission(event) {
 
     // Populate grid
     testDinosaurs = createDinosaurs()
-    console.log(`Dinosaurs created: ${testDinosaurs}`)
-    createGrid(testDinosaurs, {})
+    testHuman = createHuman()
+    createGrid(testDinosaurs, testHuman)
 }
 
 
